@@ -16,17 +16,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rx2-yy-eHM">
-                                <rect key="frame" x="87" y="384" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rx2-yy-eHM">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8XO-2h-o6m">
-                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XO-2h-o6m">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem title="Pick" id="4il-MT-Wmq">
                                         <connections>
-                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="I3d-Gw-tOv"/>
+                                            <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="Ywn-wP-2ZP"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Camera" id="ZUl-zm-Muy">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="jpL-4K-Awe"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -34,14 +37,24 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8XO-2h-o6m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7SA-Y9-jcf"/>
+                            <constraint firstItem="Rx2-yy-eHM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ElY-D5-9Sc"/>
+                            <constraint firstItem="8XO-2h-o6m" firstAttribute="top" secondItem="Rx2-yy-eHM" secondAttribute="bottom" id="K7I-fG-EE4"/>
+                            <constraint firstItem="Rx2-yy-eHM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ONd-50-fYD"/>
+                            <constraint firstItem="Rx2-yy-eHM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Q67-IL-yCd"/>
+                            <constraint firstItem="8XO-2h-o6m" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="oss-An-ec2"/>
+                            <constraint firstItem="8XO-2h-o6m" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="yyN-wC-skg"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="ImagePickerView" destination="Rx2-yy-eHM" id="BUl-uh-9W6"/>
+                        <outlet property="cameraButton" destination="ZUl-zm-Muy" id="LKR-SJ-WED"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="82"/>
+            <point key="canvasLocation" x="18.840579710144929" y="81.696428571428569"/>
         </scene>
     </scenes>
     <resources>
