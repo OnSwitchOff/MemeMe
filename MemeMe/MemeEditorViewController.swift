@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
 
     @IBOutlet var MainNavigationBar: UINavigationBar!
     @IBOutlet var MainToolBar: UIToolbar!
@@ -19,15 +19,39 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var memedImage: UIImage!
     var meme: Meme!
     
+    let memeTextAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.strokeColor: UIColor.black,
+        NSAttributedString.Key.foregroundColor: UIColor.white,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondenseBlack", size: 30)!,
+        NSAttributedString.Key.strokeWidth: 2
+    ]
+    
+    func prepareTextField(textField: UITextField, defaultText: String){
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.delegate = self
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        prepareTextField(textField: TopTF, defaultText: "TOP")
+        prepareTextField(textField: BotTF, defaultText: "BOTTOM")
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        #if targetEnvironment(simulator)
+            cameraButton.isEnabled = false
+        #else
+            cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        #endif
         subscribeToKeyboardNotifications()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
@@ -46,17 +70,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    @IBAction func pickAnImageFromAlbum(_ sender: Any) {
+    func pickImage(sourceType: UIImagePickerController.SourceType){
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
+        pickerController.sourceType = sourceType
         present(pickerController, animated: true, completion: nil)
     }
     
+    
+    @IBAction func pickAnImageFromAlbum(_ sender: Any) {
+        pickImage(sourceType: .photoLibrary)
+    }
+    
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        present(pickerController, animated: true, completion: nil)
+        pickImage(sourceType: .camera)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -72,7 +99,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func keyboardWillShow(_ notification: Notification){
-        view.frame.origin.y = -getKeyboardHeight(notification)
+        if BotTF.isFirstResponder{
+            view.frame.origin.y = -getKeyboardHeight(notification)
+        }
     }
     
     @objc func keyboardWillHide(_ notification: Notification){
@@ -122,7 +151,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(activityViewController, animated: true, completion: nil)
         
         activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, arrayReturnedItems:[Any]?, error: Error?) in
-            self.save()
+            if completed {
+                self.save()
+            }
             activityViewController.dismiss(animated: true)
         }
     }
