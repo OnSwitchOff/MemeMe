@@ -48,7 +48,7 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWc-K6-T20">
-                                <rect key="frame" x="204.5" y="118" width="5" height="22"/>
+                                <rect key="frame" x="0.0" y="118" width="414" height="22"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                 <connections>
@@ -56,7 +56,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XFT-aa-vTb">
-                                <rect key="frame" x="204.5" y="761" width="5" height="22"/>
+                                <rect key="frame" x="0.0" y="761" width="414" height="22"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                 <connections>
@@ -69,15 +69,19 @@
                         <constraints>
                             <constraint firstItem="XFT-aa-vTb" firstAttribute="bottom" secondItem="Rx2-yy-eHM" secondAttribute="bottom" constant="-30" id="0EB-kM-fw9"/>
                             <constraint firstItem="8XO-2h-o6m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7SA-Y9-jcf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gWc-K6-T20" secondAttribute="trailing" id="9N6-Nz-0HM"/>
                             <constraint firstItem="9S3-Ba-o6G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BNH-G5-7c3"/>
                             <constraint firstItem="gWc-K6-T20" firstAttribute="centerX" secondItem="Rx2-yy-eHM" secondAttribute="centerX" id="BzH-K9-udQ"/>
                             <constraint firstItem="Rx2-yy-eHM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ElY-D5-9Sc"/>
+                            <constraint firstItem="gWc-K6-T20" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FWD-2O-M2o"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XFT-aa-vTb" secondAttribute="trailing" id="Lpl-Qa-xMe"/>
                             <constraint firstItem="Rx2-yy-eHM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Q67-IL-yCd"/>
                             <constraint firstItem="XFT-aa-vTb" firstAttribute="centerX" secondItem="Rx2-yy-eHM" secondAttribute="centerX" id="Rh8-O2-bpa"/>
                             <constraint firstItem="9S3-Ba-o6G" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TaY-Gx-gcj"/>
                             <constraint firstItem="8XO-2h-o6m" firstAttribute="top" secondItem="Rx2-yy-eHM" secondAttribute="bottom" id="Tol-Oe-gs4"/>
                             <constraint firstItem="9S3-Ba-o6G" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jNI-bc-ba7"/>
                             <constraint firstItem="8XO-2h-o6m" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="oss-An-ec2"/>
+                            <constraint firstItem="XFT-aa-vTb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tTf-3u-ba9"/>
                             <constraint firstItem="Rx2-yy-eHM" firstAttribute="top" secondItem="9S3-Ba-o6G" secondAttribute="bottom" id="uhz-LA-5m4"/>
                             <constraint firstItem="gWc-K6-T20" firstAttribute="top" secondItem="Rx2-yy-eHM" secondAttribute="top" constant="30" id="yAT-tB-1Y9"/>
                             <constraint firstItem="8XO-2h-o6m" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="yyN-wC-skg"/>
