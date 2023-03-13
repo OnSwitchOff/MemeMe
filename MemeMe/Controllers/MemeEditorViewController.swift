@@ -128,6 +128,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func save() -> Void  {
         meme = Meme(topText: TopTF.text!, bottomText: BotTF.text!, originalImage: ImagePickerView.image!, memedImage: memedImage!)
+        
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
     }
     
     func generateMemmedImage() -> UIImage {

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class Meme {
+struct Meme {
     let topText: String!
     let bottomText: String!
     let originalImage: UIImage!
@@ -20,5 +20,12 @@ class Meme {
         self.originalImage = originalImage
         self.memedImage = memedImage
     }
-    
+}
+
+extension Meme {
+    // Generate an array full of all of the villains in
+    static var allMemes: [Meme] {
+        let memeArray = [Meme]()
+        return memeArray
+    }
 }
