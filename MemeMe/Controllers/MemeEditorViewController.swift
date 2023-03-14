@@ -9,15 +9,14 @@ import UIKit
 
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
 
-    @IBOutlet var MainNavigationBar: UINavigationBar!
-    @IBOutlet var MainToolBar: UIToolbar!
-    @IBOutlet var ImagePickerView: UIImageView!
+    @IBOutlet var memeNavigationBar: UINavigationBar!
+    @IBOutlet var mainToolBar: UIToolbar!
+    @IBOutlet var imagePickerView: UIImageView!
     @IBOutlet var cameraButton: UIBarButtonItem!
-    @IBOutlet var TopTF: UITextField!
-    @IBOutlet var BotTF: UITextField!
+    @IBOutlet var topTF: UITextField!
+    @IBOutlet var botTF: UITextField!
     @IBOutlet var shareButton: UIBarButtonItem!
     var memedImage: UIImage!
-    var meme: Meme!
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -36,8 +35,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        prepareTextField(textField: TopTF, defaultText: "TOP")
-        prepareTextField(textField: BotTF, defaultText: "BOTTOM")
+        prepareTextField(textField: topTF, defaultText: "TOP")
+        prepareTextField(textField: botTF, defaultText: "BOTTOM")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -46,6 +45,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
         #if targetEnvironment(simulator)
             cameraButton.isEnabled = false
         #else
@@ -55,20 +55,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
     
     
     @IBAction func topEdititngDidBegin(_ sender: Any) {
-        if TopTF.text == "Top" {
-            TopTF.text = ""
+        if topTF.text == "Top" {
+            topTF.text = ""
             
         }
     }
     @IBAction func botEdititngDidBegin(_ sender: Any) {
-        if BotTF.text == "Bottom" {
-            BotTF.text = ""
+        if botTF.text == "Bottom" {
+            botTF.text = ""
         }
     }
     
@@ -90,7 +91,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            ImagePickerView.image = image
+            imagePickerView.image = image
             shareButton.isEnabled = true
         }
         dismiss(animated: true,completion: nil)
@@ -101,7 +102,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @objc func keyboardWillShow(_ notification: Notification){
-        if BotTF.isFirstResponder{
+        if botTF.isFirstResponder{
             view.frame.origin.y = -getKeyboardHeight(notification)
         }
     }
@@ -127,23 +128,23 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func save() -> Void  {
-        meme = Meme(topText: TopTF.text!, bottomText: BotTF.text!, originalImage: ImagePickerView.image!, memedImage: memedImage!)
+        let meme: Meme = Meme(topText: topTF.text!, bottomText: botTF.text!, originalImage: imagePickerView.image!, memedImage: memedImage!)
         
         (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
     }
     
     func generateMemmedImage() -> UIImage {
         
-        MainNavigationBar.isHidden = true
-        MainToolBar.isHidden = true
+        memeNavigationBar.isHidden = true
+        mainToolBar.isHidden = true
         
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        MainNavigationBar.isHidden = false
-        MainToolBar.isHidden = false
+        memeNavigationBar.isHidden = false
+        mainToolBar.isHidden = false
         
         return memedImage;
     }
